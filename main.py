@@ -160,6 +160,8 @@ def response(input):
      elif tool_call_name == "document_search":
          results = document_search(args["query"])  # Call the function with the query
      
+     st.sidebar.write("Function currently being executed: " + tool_call_name, args)
+     
      messages = [{
             "role": "user",
             "content": input
@@ -186,6 +188,9 @@ def response(input):
 st.title("Agentic OpenAI Chatbot")
 st.markdown("Welcome to the Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
+st.sidebar.title("Traces...")
+
+
 
 with st.form("form"):
     input = st.text_area("Message")
