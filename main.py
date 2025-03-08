@@ -182,7 +182,7 @@ def response(input):
          results = document_search(args["query"])  # Call the function with the query
      
      # Display the function being executed in the sidebar
-     st.sidebar.write("Function currently being executed: " + tool_call_name, args)
+     st.sidebar.write("Last executed function: " + tool_call_name, args)
 
     # Create a new message with the tool call
      messages.append({
@@ -223,4 +223,3 @@ if input := st.chat_input("Your message..."):
         response_text = response(input)
         message_placeholder.markdown(response_text)
         st.session_state.messages.append({"role": "assistant", "content": response_text})
-
