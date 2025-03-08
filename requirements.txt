@@ -1,3 +1,4 @@
 openai
 dotenv
 streamlit
+azure-search-documents
