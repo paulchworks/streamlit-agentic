@@ -128,14 +128,10 @@ tools = [
         "parameters": {
             "type": "object",
             "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "City and country e.g. Bogotá, Colombia"
-                }
+                "latitude": {"type": "number"},
+                "longitude": {"type": "number"}
             },
-            "required": [
-                "location"
-            ],
+            "required": ["latitude", "longitude"],
             "additionalProperties": False
         },
         "strict": False
@@ -151,11 +147,42 @@ def response(input):
                "content": input
                 }
             ],
-          tools=tools
+          tools=tools,
+          tool_choice="auto"
           )
      tool_call = completion.choices[0].message.tool_calls[0]
-     return tool_call
+     tool_call_name = tool_call.function.name
+     args = json.loads(tool_call.function.arguments)
+     if tool_call_name == "get_weather":
+         results = get_weather(args["latitude"], args["longitude"])
+     elif tool_call_name == "web_search":
+         results = web_search(args["query"])
+     elif tool_call_name == "document_search":
+         results = document_search(args["query"])  # Call the function with the query
+     
+     messages = [{
+            "role": "user",
+            "content": input
+     }]
+     messages.append({
+            "role": "assistant",
+            "tool_calls": [tool_call.model_dump()]
+     })
+     messages.append({
+            "role": "tool",
+            "tool_call_id": tool_call.id,
+            "content": str(results)
+     })
+     completion_2 = client.chat.completions.create(
+           model="gpt-4o-mini",
+           messages=messages,
+           tools=tools,
+     )
+     return completion_2.choices[0].message.content
 
+##################
+# Streamlit Code #
+##################
 st.title("Agentic OpenAI Chatbot")
 st.markdown("Welcome to the Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
