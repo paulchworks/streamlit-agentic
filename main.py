@@ -181,8 +181,10 @@ def response(input):
      elif tool_call_name == "document_search":
          results = document_search(args["query"])  # Call the function with the query
      
+     # Display the function being executed in the sidebar
      st.sidebar.write("Function currently being executed: " + tool_call_name, args)
 
+    # Create a new message with the tool call
      messages.append({
             "role": "assistant",
             "tool_calls": [tool_call.model_dump()]
@@ -192,12 +194,12 @@ def response(input):
             "tool_call_id": tool_call.id,
             "content": str(results)
      })
-     completion_2 = client.chat.completions.create(
+     final_response = client.chat.completions.create(
            model="gpt-4o-mini",
            messages=messages,
            tools=tools,
      )
-     return completion_2.choices[0].message.content
+     return final_response.choices[0].message.content
 
 ##################
 # Streamlit Code #
@@ -206,8 +208,19 @@ st.title("PaulchWorks Agentic OpenAI Chatbot")
 st.markdown("Welcome to the PaulchWorks Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
 st.sidebar.title("Traces...")
-with st.form("form"):
-    input = st.text_area("My question is...")
-    submit = st.form_submit_button("Over to you, PaulchWorks!")
-    if submit:
-        st.write(response(input))
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+         st.markdown(message["content"])
+if input := st.chat_input("Your message..."):
+     st.session_state.messages.append({"role": "user", "content": input})
+     with st.chat_message("user"):
+         st.markdown(input)
+     with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        message_placeholder.write("Thinking...")
+        response_text = response(input)
+        message_placeholder.markdown(response_text)
+        st.session_state.messages.append({"role": "assistant", "content": response_text})
+
