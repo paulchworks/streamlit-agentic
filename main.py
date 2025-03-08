@@ -177,14 +177,16 @@ def response(input):
      
      st.sidebar.write("Function currently being executed: " + tool_call_name, args)
      
-     messages = [{
-            "role": "user",
-            "content": input
-     }]
-     messages.append({
-          "role": "developer", 
-          "content": "You are a helpful assistant. The current date is " + current_date
-    })
+     messages=[
+               {
+                    "role": "developer", 
+                    "content": "You are a helpful assistant. The current date is " + current_date
+                    },
+                {
+                    "role": "user", 
+                    "content": input
+                    }
+            ]
      messages.append({
             "role": "assistant",
             "tool_calls": [tool_call.model_dump()]
