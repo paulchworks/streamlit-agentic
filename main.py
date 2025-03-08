@@ -8,6 +8,16 @@ from azure.search.documents import SearchClient
 from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
 from openai import AzureOpenAI
+from datetime import datetime
+
+# Get the current date and time
+current_datetime = datetime.now()
+
+# Extract the current year
+current_year = current_datetime.year
+
+# Format the current date (optional)
+current_date = current_datetime.strftime("%Y-%m-%d")  # Format as YYYY-MM-DD
 
 # Load environment variables from .env file
 load_dotenv()
@@ -167,6 +177,10 @@ def response(input):
             "content": input
      }]
      messages.append({
+          "role": "developer", 
+          "content": "You are a helpful assistant. The current date is " + current_date
+    })
+     messages.append({
             "role": "assistant",
             "tool_calls": [tool_call.model_dump()]
      })
@@ -189,12 +203,9 @@ st.title("Agentic OpenAI Chatbot")
 st.markdown("Welcome to the Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
 st.sidebar.title("Traces...")
-
-
-
 with st.form("form"):
-    input = st.text_area("Message")
-    submit = st.form_submit_button("Send")
+    input = st.text_area("My question is...")
+    submit = st.form_submit_button("Over to you, Agentic!")
 
     if submit:
         st.write(response(input))
