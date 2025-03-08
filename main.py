@@ -156,21 +156,20 @@ tools = [
     }
 ]
 
-def response(input): 
+def response(input):
+     messages=[{
+        "role": "developer", 
+        "content": "You are a helpful assistant. The current date is " + current_date
+        },
+        {
+        "role": "user", 
+        "content": input
+        }]
      completion = client.chat.completions.create(
           model="gpt-4o-mini",
-          messages=[
-               {
-                    "role": "developer", 
-                    "content": "You are a helpful assistant. The current date is " + current_date
-                    },
-                {
-                    "role": "user", 
-                    "content": input
-                    }
-            ],
+          messages=messages,
           tools=tools,
-          tool_choice="auto"
+          tool_choice="required"
           )
      tool_call = completion.choices[0].message.tool_calls[0]
      tool_call_name = tool_call.function.name
@@ -183,17 +182,7 @@ def response(input):
          results = document_search(args["query"])  # Call the function with the query
      
      st.sidebar.write("Function currently being executed: " + tool_call_name, args)
-     
-     messages=[
-               {
-                    "role": "developer", 
-                    "content": "You are a helpful assistant. The current date is " + current_date
-                    },
-                {
-                    "role": "user", 
-                    "content": input
-                    }
-            ]
+
      messages.append({
             "role": "assistant",
             "tool_calls": [tool_call.model_dump()]
@@ -213,12 +202,12 @@ def response(input):
 ##################
 # Streamlit Code #
 ##################
-st.title("Agentic OpenAI Chatbot")
-st.markdown("Welcome to the Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
+st.title("PaulchWorks Agentic OpenAI Chatbot")
+st.markdown("Welcome to the PaulchWorks Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
 st.sidebar.title("Traces...")
 with st.form("form"):
     input = st.text_area("My question is...")
-    submit = st.form_submit_button("Over to you, Agentic!")
+    submit = st.form_submit_button("Over to you, PaulchWorks!")
     if submit:
         st.write(response(input))
