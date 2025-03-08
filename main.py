@@ -1,4 +1,11 @@
-# Description: This file contains the main code for the Agentic OpenAI Chatbot. The chatbot is powered by OpenAI's engine and uses Azure Cognitive Search to search for documents and Bing Web Search to search the web for information.
+# Description: This file contains the main code for the Agentic OpenAI Chatbot. 
+# The chatbot is powered by OpenAI's engine and uses Azure Cognitive Search to 
+# search for documents and Bing Web Search to search the web for information.
+# The chatbot can also provide the current temperature for a given location.
+# The code defines functions for document search, web search, and getting weather information.
+# The response function processes the user input and calls the appropriate function based on the input.
+# The Streamlit code handles the user interface and interaction with the chatbot.
+
 from openai import OpenAI
 import os
 import json
