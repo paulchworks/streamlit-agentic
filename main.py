@@ -152,10 +152,15 @@ tools = [
 def response(input): 
      completion = client.chat.completions.create(
           model="gpt-4o-mini",
-          messages=[{
-               "role": "user", 
-               "content": input
-                }
+          messages=[
+               {
+                    "role": "developer", 
+                    "content": "You are a helpful assistant. The current date is " + current_date
+                    },
+                {
+                    "role": "user", 
+                    "content": input
+                    }
             ],
           tools=tools,
           tool_choice="auto"
@@ -206,6 +211,5 @@ st.sidebar.title("Traces...")
 with st.form("form"):
     input = st.text_area("My question is...")
     submit = st.form_submit_button("Over to you, Agentic!")
-
     if submit:
         st.write(response(input))
