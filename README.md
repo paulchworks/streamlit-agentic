@@ -1,6 +1,6 @@
 # Agentic OpenAI Chatbot
 ![image](https://github.com/user-attachments/assets/0179aa41-94d6-4475-b813-44275c7491e8)
-
+![image](https://github.com/user-attachments/assets/4c6a8859-64f9-4991-9654-5881c024ae7c)
 ## Overview
 This chatbot leverages OpenAI's language models (GPT-4o-mini) alongside Azure Cognitive Search, Bing Web Search, and weather APIs to provide comprehensive answers. It combines internal document search, real-time web data, and weather information to address user queries.
 
