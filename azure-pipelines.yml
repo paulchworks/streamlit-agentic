@@ -68,6 +68,12 @@ stages:
     - script: ls -R $(Build.ArtifactStagingDirectory)
       displayName: 'List Build Artifacts'
 
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.ArtifactStagingDirectory)/app.zip'
+        artifact: 'drop'
+        publishLocation: 'pipeline'
+
 - stage: Deploy
   displayName: 'Deploy Application'
   dependsOn: Build
