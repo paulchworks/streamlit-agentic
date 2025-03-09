@@ -200,10 +200,10 @@ def response(input):
            messages=messages,
            tools=tools,
      )
-     #return final_response.choices[0].message.content
-     for word in final_response.choices[0].message.content.split():
-          yield word + " "
-          time.sleep(0.01)
+     return final_response.choices[0].message.content
+     #for word in final_response.choices[0].message.content.split():
+     #     yield word + " "
+     #     time.sleep(0.05)
 
 ##################
 # Streamlit Code #
@@ -224,7 +224,7 @@ if input := st.chat_input("Your message..."):
      with st.chat_message("assistant"):
         message_placeholder = st.empty()
         message_placeholder.write("Thinking...")
-        #response_text = response(input)
-        #message_placeholder.markdown(response_text)
-        response_text = st.write_stream(response(input))
+        response_text = response(input)
+        message_placeholder.markdown(response_text)
+        #response_text = st.write_stream(response(input))
         st.session_state.messages.append({"role": "assistant", "content": response_text})
