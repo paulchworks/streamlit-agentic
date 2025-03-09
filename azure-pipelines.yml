@@ -44,22 +44,15 @@ stages:
         echo "AZURE_OPENAI_ENDPOINT= $(az-openai-endpoint)" >> .env
         displayName: 'Generate .env File'
         env:
-          MODEL: gpt-4o-mini
-          OPENAI_API_KEY: $(openai-api-key) #Secret from Key Vault
-
-        
-      displayName: 'Generate .env File'
-      env:
-        MODEL: gpt-4o-mini
-        OPENAI_API_KEY: $(openai-api-key)
-        BING_KEY: $(bing-key)
-        BING_ENDPOINT: $(bing-endpoint)
-        AZURE_SEARCH_API_KEY: $(ai-search-key)
-        AZURE_SEARCH_SERVICE_ENDPOINT: $(ai-search-endpoint)
-        AZURE_SEARCH_INDEX: $(ai-search-index)
-        AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG: $(ai-search-semantic-config)
-        AZURE_OPENAI_API_KEY: $(az-openai-key)
-        AZURE_OPENAI_ENDPOINT: $(az-openai-endpoint)
+          OPENAI_API_KEY: $(openai-api-key)
+          BING_KEY: $(bing-key)
+          BING_ENDPOINT: $(bing-endpoint)
+          AZURE_SEARCH_API_KEY: $(ai-search-key)
+          AZURE_SEARCH_SERVICE_ENDPOINT: $(ai-search-endpoint)
+          AZURE_SEARCH_INDEX: $(ai-search-index)
+          AZURE_SEARCH_SEMANTIC_SEARCH_CONFIG: $(ai-search-semantic-config)
+          AZURE_OPENAI_API_KEY: $(az-openai-key)
+          AZURE_OPENAI_ENDPOINT: $(az-openai-endpoint)
       
     - script: ls -R .
       displayName: 'List Working Directory Contents'
