@@ -167,7 +167,7 @@ def response(input):
         "content": input
         }]
      completion = client.chat.completions.create(
-          model="gpt-4o-mini",
+          model="o3-mini",
           messages=messages,
           tools=tools,
           tool_choice="required"
