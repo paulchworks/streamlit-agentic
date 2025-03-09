@@ -16,6 +16,7 @@ from azure.core.credentials import AzureKeyCredential
 from dotenv import load_dotenv
 from openai import AzureOpenAI
 from datetime import datetime
+import time
 
 # Get the current date and time
 current_datetime = datetime.now()
