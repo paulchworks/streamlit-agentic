@@ -208,6 +208,19 @@ def response(input):
 ##################
 # Streamlit Code #
 ##################
+st.set_page_config(page_title="PaulchWorks Agentic", layout="wide")
+st.markdown(
+     r"""
+    <style>
+        .stAppDeployButton {visibility: hidden;}
+        .reportview-container {
+            margin-top: -2em;
+        }
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        #stDecoration {display:none;}
+    </style>
+""", unsafe_allow_html=True)
 st.title("PaulchWorks Agentic OpenAI Chatbot")
 st.markdown("Welcome to the PaulchWorks Agentic OpenAI Chatbot. This chatbot is powered by OpenAI's engine. You can ask the chatbot any question and it will do its best to provide an answer.")
 st.markdown("Write a message below to get started.")
