@@ -1,4 +1,4 @@
-# Agentic OpenAI Chatbot
+# Agentic OpenAI Chatbot (eg. Web Search, Document Search and Weather Check)
 ![image](https://github.com/user-attachments/assets/0179aa41-94d6-4475-b813-44275c7491e8)
 ![image](https://github.com/user-attachments/assets/8eaee6c4-379c-4751-8f1c-f8786e1d0d9d)
 ![image](https://github.com/user-attachments/assets/2519e5c7-9528-43a0-9ca1-df562dcd4a63)
