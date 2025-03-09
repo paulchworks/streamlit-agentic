@@ -101,4 +101,4 @@ stages:
         WebAppName: 'st-paulch'
         packageForLinux: '$(Pipeline.Workspace)/app.zip'
         RuntimeStack: 'PYTHON:3.11'
-        StartupCommand: 'streamlit run main.py --server.port $PORT'
+        StartupCommand: 'pip install -r requirements.txt&&streamlit run main.py --server.port $PORT'
